@@ -1,0 +1,10 @@
+body {
+  background-color: red;
+  color: aquamarine;
+}
+
+p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}

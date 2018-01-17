@@ -1,0 +1,10 @@
+body {
+  background-color: red;
+  color: white;
+}
+
+p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
