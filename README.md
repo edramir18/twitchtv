@@ -34,7 +34,7 @@ Contain information about the stream, from here we can know about the user is on
 https://wind-bow.glitch.me/twitch-api/streams/esl_sc2
 ```
 
-##Aditional Information
+## Aditional Information
 ### Useful links
 - [Twitch API](https://gulpjs.com/)
 - [Proxy Twitch API](https://wind-bow.glitch.me/)
