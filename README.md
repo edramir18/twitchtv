@@ -12,8 +12,7 @@ git push origin master
 ```
 
 ### Useful links
-
--[Gulp](https://gulpjs.com/)
--[Browser-Sync](https://browsersync.io/)
--[Sass](http://sass-lang.com/)
--[MDN Firefox](https://developer.mozilla.org/en-US/docs/Web)
+- [Gulp](https://gulpjs.com/)
+- [Browser-Sync](https://browsersync.io/)
+- [Sass](http://sass-lang.com/)
+- [MDN Firefox](https://developer.mozilla.org/en-US/docs/Web)
