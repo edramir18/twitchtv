@@ -1,18 +1,41 @@
-# HTML 5 + SASS + GULP
-Template repository to create html project with gulp, browser-sync and sass.
+# Twitch App
+Webpage to show the information from the twitch API
 
-## How to clone this repository
-
+## Twitch API useful information
+### User
+Contain information about the user:
+- name
+- display name
+- bio
+- logo (image 300x300)
 ```
-git clone <repository_url>
-cd <repository_dir>
-git remote add upstream git@github.com:edramir18/htmlwithgulp.git
-git pull upstream master
-git push origin master
+https://wind-bow.glitch.me/twitch-api/users/esl_sc2
+```
+### Channel
+Contain information about the channel:
+- status
+- game
+- video_banner
+- profile_banner
+- profile_banner_background_color
+- url
+- views
+- followers
+```
+https://wind-bow.glitch.me/twitch-api/channels/esl_sc2
+```
+### Streams
+Contain information about the stream, from here we can know about the user is online or not
+- stream
+- preview
+- viewers
+- stream_type
+```
+https://wind-bow.glitch.me/twitch-api/streams/esl_sc2
 ```
 
+##Aditional Information
 ### Useful links
-- [Gulp](https://gulpjs.com/)
-- [Browser-Sync](https://browsersync.io/)
-- [Sass](http://sass-lang.com/)
-- [MDN Firefox](https://developer.mozilla.org/en-US/docs/Web)
+- [Twitch API](https://gulpjs.com/)
+- [Proxy Twitch API](https://wind-bow.glitch.me/)
+- [Forum post about this challenge](http://sass-lang.com/)
