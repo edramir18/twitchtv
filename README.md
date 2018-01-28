@@ -39,3 +39,5 @@ https://wind-bow.glitch.me/twitch-api/streams/esl_sc2
 - [Twitch API](https://gulpjs.com/)
 - [Proxy Twitch API](https://wind-bow.glitch.me/)
 - [Forum post about this challenge](http://sass-lang.com/)
+- [Using Fecth](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+- [Promises Explained](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)

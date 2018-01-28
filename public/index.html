@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gulp Initial Project</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gulp Initial Project</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Gulp + SASS + Browser-Sync</h1>
-    <script src="js/index.js"></script>
+  <header class="header">
+    <h1 class="title">Twitch API</h1>
+  </header>
+  <nav>
+    <div>            
+      <input type="radio" name="filter" id="filter_all" value="all" checked>
+      <label for="filter_all">All</label>
+      <input type="radio" name="filter" id="filter_live" value="live">
+      <label for="filter_live">Live</label>
+      <input type="radio" name="filter" id="filter_offline" value="offline">
+      <label for="filter_offline">Offline</label>
+    </div>
+  </nav>
+  <main id="main_panel">
+    <div class="content">
+    </div>
+  </main>
+  <footer><small>&copy;2018 Eduardo Ramirez</small></footer>
+  <script src="js/index.js"></script>
+  <template id="twitchuser">
+    <article>
+      <header><a href="#" target="_blank"></a> - <span></span></header>
+      <p></p>
+    </article>
+  </template>
 </body>
 </html>

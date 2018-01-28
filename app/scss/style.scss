@@ -1,9 +1,3 @@
-$color: red;
-
-body {
-    background-color: $color;
-    color: silver;
-}
-p {
-    display: flex;
+.-is-hidden {
+    display: none;
 }
