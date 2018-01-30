@@ -1,25 +1,9 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  padding: 0;
-  margin: 0;
-}
-
 .container {
+  // Dimesions and Colors
+  // background-color: $grey;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100vh;  
+  // Display Properties
   display: grid;
   grid-template-rows: 4em 2em auto 1.5em;
   grid-template-columns: 1fr;
@@ -30,18 +14,18 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 2vw;
   line-height: 2;
   color: #333333;
-  background-color: #d6dfc2;
+  background-color: $grey;
 }
 
-.nav {
+.nav {  
   padding: 0 2vw;
   line-height: 2;
-  color: #f6fceb;
-  background-color: #016367;
+  color: $white;
+  background-color: $primary;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center
 }
 
 input[type="radio"] {
@@ -53,10 +37,6 @@ input[type="radio"] {
   z-index: 100;
   display: inline-block;
   margin: 0 0.2em;
-  background-color: #f6fceb;
-  color: black;
-}
-
-.-is-hidden {
-  display: none;
+  background-color: $white;
+  color: black;  
 }
