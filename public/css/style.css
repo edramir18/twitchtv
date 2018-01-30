@@ -17,6 +17,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+input[type="radio"] {
+  display: none;
+}
+
 .container {
   width: 100vw;
   min-height: 100vh;
@@ -24,6 +28,10 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-rows: 4em 2em auto 1.5em;
   grid-template-columns: 1fr;
   grid-gap: 0.25em;
+}
+
+.container__start {
+  grid-template-rows: 4em 0 auto 1.5em;
 }
 
 .header {
@@ -34,27 +42,104 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav {
+  position: relative;
+  height: 2em;
   padding: 0 2vw;
-  line-height: 2;
   color: #f6fceb;
-  background-color: #016367;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
 }
 
-input[type="radio"] {
-  display: none;
+.slider {
+  user-select: none;
+  position: relative;
+  display: inline-block;
+  width: 7em;
+  height: 1.5em;
+  background-color: silver;
+  color: black;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-style: italic;
+  padding-left: 1.5em;
+  padding-right: 0.5em;
+  border-radius: 1.5em;
+  overflow: hidden;
+  transition: color .8s;
+  transition: padding .8s;
 }
 
-.menu-item {
-  position: relative;
-  z-index: 100;
+.slider:hover {
+  transform: scale(1.05);
+}
+
+.slider:not(:last-child) {
+  margin-right: 0.4em;
+}
+
+.slider:before {
+  content: '';
   display: inline-block;
-  margin: 0 0.2em;
-  background-color: #f6fceb;
-  color: black;
+  position: absolute;
+  background-color: white;
+  top: 0.25em;
+  left: 0.25em;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  transition: all .4s;
+}
+
+input:checked + .slider {
+  font-style: normal;
+  font-weight: bold;
+  color: white;
+  padding-left: 0.5em;
+  background-color: #016367;
+}
+
+input:checked + .slider:before {
+  transform: translateX(5.5em);
+}
+
+.content {
+  width: 100%;
+  position: relative;
+  padding: 0 1em;
+}
+
+.splash {
+  outline: 1px solid red;
+  font-size: 2em;
+}
+
+.msg {
+  display: inline-block;
+}
+
+.spinner {
+  display: inline-block;
+  position: relative;
+  border: .75em solid transparent;
+  border-radius: .75em;
+}
+
+.spinner:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -0.95em;
+  top: -0.95em;
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 50%;
+  border: .2em solid orange;
+}
+
+.footer {
+  background-color: #d6dfc2;
 }
 
 .-is-hidden {

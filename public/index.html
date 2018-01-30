@@ -13,20 +13,24 @@
       <h1 class="title">Twitch API</h1>
     </header>
     <nav>
-      <div class="nav">            
+      <div class="nav -is-hidden">            
         <input type="radio" name="filter" id="filter_all" value="all" checked>
-        <label class="menu-item" for="filter_all">All</label>
+        <label class="slider" for="filter_all"><span>All</span></label>
         <input type="radio" name="filter" id="filter_live" value="live">
-        <label class="menu-item" for="filter_live">Live</label>
+        <label class="slider" for="filter_live"><span>Live</span></label>
         <input type="radio" name="filter" id="filter_offline" value="offline">
-        <label class="menu-item" for="filter_offline">Offline</label>
+        <label class="slider" for="filter_offline"><span>Offline</span></label>
       </div>
     </nav>
     <main id="main_panel">
       <div class="content">
+        <div class="splash">
+          <div class="msg">Loading information...</div>
+          <div class="spinner"></div>
+        </div>    
       </div>
     </main>
-    <footer><small>&copy;2018 Eduardo Ramirez</small></footer>
+    <footer class="footer"><small>&copy;2018 Eduardo Ramirez</small></footer>
   </div>
   <template id="twitchuser">
     <article>

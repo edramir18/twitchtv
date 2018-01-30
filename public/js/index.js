@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
   const filterRatios = document.querySelectorAll('[name=filter]')
   filterRatios.forEach(k => k.addEventListener('change', ratioHandler))
-
+/*
   const eslSc2 = fetchUserTwitchInfo('esl_sc2')
   const freeCodeCamp = fetchUserTwitchInfo('freecodecamp')
   const test = fetchUserTwitchInfo('test_channel')
@@ -81,4 +81,5 @@ document.addEventListener('DOMContentLoaded', (e) => {
   .catch(err => {
     console.log('ERROR: ' + err)
   })  
+  */
 })
