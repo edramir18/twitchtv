@@ -1,7 +1,7 @@
 'use strict'
 /* global fetch:false */
 
-function ratioHandler (event) { 
+function ratioHandler (event) {
   const selector = event.target.value
   const lives = document.querySelectorAll('article[data-live=true]')
   const offline = document.querySelectorAll('article[data-live=false]')
@@ -45,41 +45,47 @@ function fetchUserTwitchInfo (user) {
 }
 
 function showUserInformation (users) {
-  const oldContent = document.getElementById('main_panel').children[0]
   const content = document.createElement('div')
   content.classList.add('content')
 
   users.forEach(k => {
+    console.log(k)
+    if (k.user.hasOwnProperty('error')) return
     const twitch = document.getElementById('twitchuser').content.cloneNode(true)
     if (k.stream.stream) {
       twitch.querySelector('article').setAttribute('data-live', true)
-      twitch.querySelector('span').textContent = 'LIVE'
+      twitch.querySelector('.streamer__logo').classList.add('-is-live')
     } else {
       twitch.querySelector('article').setAttribute('data-live', false)
-      twitch.querySelector('span').textContent = 'Offline'
     }
+    twitch.querySelector('img').setAttribute('src', k.user.logo)
     twitch.querySelector('a').textContent = k.user.name
-    twitch.querySelector('a').setAttribute('href', k.channel.url)    
+    twitch.querySelector('a').setAttribute('href', k.channel.url)   
     twitch.querySelector('p').textContent = k.user.bio
     content.appendChild(twitch)
   })
-  oldContent.parentNode.replaceChild(content, oldContent)
+  updateMain('.splash', content)
+}
+
+function updateMain (selector, panel) {
+  const target = document.querySelector(selector)
+  target.classList.add('-is-dismissed')
+  target.addEventListener('animationend', function () {
+    const main = document.querySelector('#main_panel')   
+    main.replaceChild(panel, main.firstElementChild)
+    document.querySelector('.nav').classList.remove('-is-hidden');
+  })
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOM Loaded')
-
   const filterRatios = document.querySelectorAll('[name=filter]')
-  filterRatios.forEach(k => k.addEventListener('change', ratioHandler))
-/*
-  const eslSc2 = fetchUserTwitchInfo('esl_sc2')
-  const freeCodeCamp = fetchUserTwitchInfo('freecodecamp')
-  const test = fetchUserTwitchInfo('test_channel')
-  Promise.all([eslSc2, freeCodeCamp, test]).then(values => {
+  filterRatios.forEach(k => k.addEventListener('change', ratioHandler))  
+  const users = ['esl_sc2', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'freecodecamp', 'test_channel']
+  Promise.all(users.map(u => fetchUserTwitchInfo(u))).then(values => {
     showUserInformation(values)
   })
   .catch(err => {
     console.log('ERROR: ' + err)
   })  
-  */
 })

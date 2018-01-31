@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Twitch API</title>
+  <title>My Twitch</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1 class="title">Twitch API</h1>
+      <h1 class="title">My Twitch</h1>
     </header>
     <nav>
       <div class="nav -is-hidden">            
@@ -33,9 +33,12 @@
     <footer class="footer"><small>&copy;2018 Eduardo Ramirez</small></footer>
   </div>
   <template id="twitchuser">
-    <article>
-      <header><a href="#" target="_blank"></a> - <span></span></header>
-      <p></p>
+    <article class="streamer">
+      <div class="streamer__logo">
+        <img src="">
+      </div>      
+      <header class="streamer__header"><a href="#" target="_blank"></a><span></span></header>
+      <p class="streamer__text"></p>
     </article>
   </template>
   <script src="js/index.js"></script>

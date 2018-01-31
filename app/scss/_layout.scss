@@ -8,9 +8,6 @@
   grid-template-rows: 4em 2em auto 1.5em;
   grid-template-columns: 1fr;
   grid-gap: 0.25em;
-  &__start{
-    grid-template-rows: 4em 0 auto 1.5em;
-  }
 }
 
 .header {
@@ -23,12 +20,17 @@
 .nav {
   position: relative;
   height: 2em;
-  padding: 0 2vw;
+  padding: 0 3vw;
   color: $white;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;  
+  transition: transform 1s cubic-bezier(0.51, 1.31, 0.93, 1.18);
+  left: 0;
+  &.-is-hidden{
+    left: -100%;
+  }
 }
 
 .slider {
@@ -81,33 +83,99 @@
 .content{
   width: 100%;
   position: relative;
-  padding: 0 1em;
+  padding: 0 3vw;
+  display: flex;
+  flex-direction: column;
 }
-.splash {
-  outline: 1px solid red;
-  font-size: 2em;  
+.splash {  
+  overflow: hidden;
+  font-size: 2em;
+  &.-is-dismissed {
+    animation: dismissed 1s ease-out;
+    animation-fill-mode: forwards;
+  }
+  @keyframes dismissed {
+    to {opacity: 0;}
+  }
 }
 .msg {
   display: inline-block;
 }
 .spinner {
+  $color-spinner: #333333;
+  $radius-in: .4em;
+  $radius-out: .15em;
   display: inline-block;
-  position: relative;
-  //width: 1.5em;
-  border: .75em solid transparent;
-  border-radius: .75em;
-  // background-color: red;
+  position: relative;  
+  border: $radius-in solid transparent;
+  border-radius: 50%;
   &:before {
     content: "";
     display: block;
     position: absolute;
-    left: -0.95em;
-    top: -0.95em;
-    width: 1.9em;
-    height: 1.9em;
-    //background-color: blue;
+    left: -($radius-in + $radius-out);
+    top: -($radius-in + $radius-out); 
+    width: 2*$radius-in + 2*$radius-out;
+    height: 2*$radius-in + 2*$radius-out;
     border-radius: 50%;
-    border: .2em solid orange;
+    border: $radius-out solid $color-spinner;
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: $radius-in - $radius-out / 2;
+    top: -$radius-out;    
+    border: $radius-out solid $color-spinner;
+    border-radius: 50%;    
+    box-shadow: 0 0 2px white;
+    transform-origin: -($radius-in - $radius-out / 2);    
+    animation: spinner 1s linear infinite;
+  }
+  @keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+}
+
+.streamer {
+  display: grid;
+  grid-template-columns: 5em 1fr;
+  grid-template-rows: 5em;
+  grid-gap: .5em;
+  padding: .5em 0;
+  height: 6em;
+  &__logo {
+    position:relative;
+    grid-column: 1/2;
+    grid-row: 1/3;    
+    width: 100%;
+    overflow: hidden;
+    &.-is-live::before {
+      content: 'LIVE';
+      color:white;
+      background-color: red;
+      font-size: .8em;
+      line-height: 1.4em;
+      font-weight: bold;
+      text-align: center;
+      position: absolute;
+      height: 1.4em;
+      width: 6.25em;      
+      top: -0.6em;
+      left: -3.125em;
+      transform: rotate(-45deg) translateY(2em);
+      box-shadow: 2px 2px 2px black;
+    }   
+    &>img {
+      width: 100%;
+    }
+  }
+  &__header{
+    font-size: 2em;
+    max-width: 85vw;
+  }
+  &__text {
+    display: none;
   }
 }
 

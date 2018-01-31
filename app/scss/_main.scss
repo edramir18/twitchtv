@@ -4,7 +4,7 @@
 
 html {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.5;  
 }
 
 body {
@@ -15,6 +15,11 @@ body {
 h1, h2, h3, h4 , h5, h6 {
   padding: 0;
   margin: 0;
+}
+
+a, a:visited {
+  color: initial;
+  text-decoration: none;
 }
 
 input[type="radio"] {
