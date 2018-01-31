@@ -2,17 +2,23 @@
 /* global fetch:false */
 
 function ratioHandler (event) {
-  const selector = event.target.value
+  ratioHandlerIndividual()
+}
+
+function ratioHandlerIndividual () {
+  const selector = document.querySelector('input[name=filter]:checked').value
+  console.log(selector)
   const lives = document.querySelectorAll('article[data-live=true]')
   const offline = document.querySelectorAll('article[data-live=false]')
 
   if (lives.length === 0 && offline.length) return
 
-  const liveStatus = selector === 'all' || selector === 'live'
-  const offlineStatus = selector === 'all' || selector === 'offline'
+  const isLiveSelected = selector === 'all' || selector === 'live'
+  const isOfflineSelected = selector === 'all' || selector === 'offline'
 
-  lives.forEach(k => k.classList.toggle('-is-filtered', !liveStatus))
-  offline.forEach(k => k.classList.toggle('-is-filtered', !offlineStatus))
+  if (isLiveSelected){
+    console.log(document.querySelectorAll('article[data-live=true].-is-filtered'))
+  }
 }
 
 function fecthJSON (url) {
@@ -62,6 +68,7 @@ function showUserInformation (users) {
     twitch.querySelector('a').textContent = k.user.name
     twitch.querySelector('a').setAttribute('href', k.channel.url)
     twitch.querySelector('p').textContent = k.user.bio
+    twitch.addEventListener('animationend', ratioHandlerIndividual)
     content.appendChild(twitch)
   })
   updateMain('.splash', content)
