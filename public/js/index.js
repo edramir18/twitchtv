@@ -11,8 +11,8 @@ function ratioHandler (event) {
   const liveStatus = selector === 'all' || selector === 'live'
   const offlineStatus = selector === 'all' || selector === 'offline'
 
-  lives.forEach(k => k.classList.toggle('-is-hidden', !liveStatus))
-  offline.forEach(k => k.classList.toggle('-is-hidden', !offlineStatus))
+  lives.forEach(k => k.classList.toggle('-is-filtered', !liveStatus))
+  offline.forEach(k => k.classList.toggle('-is-filtered', !offlineStatus))
 }
 
 function fecthJSON (url) {
@@ -60,7 +60,7 @@ function showUserInformation (users) {
     }
     twitch.querySelector('img').setAttribute('src', k.user.logo)
     twitch.querySelector('a').textContent = k.user.name
-    twitch.querySelector('a').setAttribute('href', k.channel.url)   
+    twitch.querySelector('a').setAttribute('href', k.channel.url)
     twitch.querySelector('p').textContent = k.user.bio
     content.appendChild(twitch)
   })
@@ -71,21 +71,21 @@ function updateMain (selector, panel) {
   const target = document.querySelector(selector)
   target.classList.add('-is-dismissed')
   target.addEventListener('animationend', function () {
-    const main = document.querySelector('#main_panel')   
+    const main = document.querySelector('#main_panel')
     main.replaceChild(panel, main.firstElementChild)
-    document.querySelector('.nav').classList.remove('-is-hidden');
+    document.querySelector('.nav').classList.remove('-is-hidden')
   })
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOM Loaded')
   const filterRatios = document.querySelectorAll('[name=filter]')
-  filterRatios.forEach(k => k.addEventListener('change', ratioHandler))  
+  filterRatios.forEach(k => k.addEventListener('change', ratioHandler))
   const users = ['esl_sc2', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'freecodecamp', 'test_channel']
   Promise.all(users.map(u => fetchUserTwitchInfo(u))).then(values => {
     showUserInformation(values)
   })
   .catch(err => {
     console.log('ERROR: ' + err)
-  })  
+  })
 })

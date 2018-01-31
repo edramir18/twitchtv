@@ -63,52 +63,57 @@ input[type="radio"] {
   user-select: none;
   position: relative;
   display: inline-block;
-  width: 7em;
-  height: 1.5em;
+  height: 2em;
   background-color: silver;
   color: black;
   text-transform: uppercase;
   font-size: 0.8em;
-  font-style: italic;
-  padding-left: 1.5em;
-  padding-right: 0.5em;
-  border-radius: 1.5em;
+  line-height: 2;
+  padding: 0 0.5em 0 3.4em;
+  border-radius: 2em;
   overflow: hidden;
-  transition: color .8s;
-  transition: padding .8s;
+  transition: background-color .8s;
 }
 
 .slider:hover {
-  transform: scale(1.05);
+  box-shadow: 2px 2px 2px black;
 }
 
 .slider:not(:last-child) {
   margin-right: 0.4em;
 }
 
-.slider:before {
+.slider:after, .slider:before {
   content: '';
-  display: inline-block;
   position: absolute;
+  transition: all .8s;
+}
+
+.slider:after {
   background-color: white;
-  top: 0.25em;
-  left: 0.25em;
-  height: 1em;
-  width: 1em;
+  top: 0.4em;
+  left: 0.4em;
+  height: 1.2em;
+  width: 1.2em;
   border-radius: 50%;
-  transition: all .4s;
+}
+
+.slider:before {
+  left: .2em;
+  top: .2em;
+  width: 3em;
+  height: 1.6em;
+  border-radius: 1.6em;
+  background-color: #888888;
 }
 
 input:checked + .slider {
-  font-style: normal;
-  font-weight: bold;
   color: white;
-  padding-left: 0.5em;
   background-color: #016367;
 }
 
-input:checked + .slider:before {
-  transform: translateX(5.5em);
+input:checked + .slider:after {
+  transform: translateX(1.4em);
 }
 
 .content {
@@ -183,7 +188,13 @@ input:checked + .slider:before {
   grid-template-rows: 5em;
   grid-gap: .5em;
   padding: .5em 0;
-  height: 6em;
+  max-height: 6em;
+  overflow: hidden;
+  animation: unfiltering 1s forwards;
+}
+
+.streamer.-is-filtered {
+  animation: filtering 1s forwards;
 }
 
 .streamer__logo {
@@ -222,6 +233,20 @@ input:checked + .slider:before {
 
 .streamer__text {
   display: none;
+}
+
+@keyframes filtering {
+  to {
+    padding: 0;
+    max-height: 0;
+  }
+}
+
+@keyframes unfiltering {
+  from {
+    padding: 0;
+    max-height: 0;
+  }
 }
 
 .footer {

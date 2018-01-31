@@ -36,47 +36,50 @@
 .slider {
   user-select: none;
   position: relative;
-  display: inline-block;
-  width: 7em;
-  height: 1.5em;
+  display: inline-block;  
+  height: 2em;
   background-color: silver;
   color: black;
   text-transform: uppercase;
   font-size: 0.8em;
-  font-style: italic;
-  padding-left: 1.5em;
-  padding-right: 0.5em;
-  border-radius: 1.5em;
+  line-height: 2;  
+  padding: 0 0.5em 0 3.4em;
+  border-radius: 2em;
   overflow: hidden;
-  transition: color .8s;
-  transition: padding .8s;
+  transition: background-color .8s;
   &:hover {
-    transform: scale(1.05);
+    box-shadow: 2px 2px 2px black;
   }
   &:not(:last-child) {
     margin-right: 0.4em;
   }
-  &:before{    
+  &:after, &:before {
     content: '';
-    display: inline-block;
     position: absolute;
-    background-color: white;
-    top: 0.25em;
-    left: 0.25em;    
-    height: 1em;
-    width: 1em;
+    transition: all .8s;
+  }
+  &:after {
+    background-color: white;    
+    top: 0.4em;
+    left: 0.4em;    
+    height: 1.2em;
+    width: 1.2em;
     border-radius: 50%;
-    transition: all .4s;
+  }
+  &:before{
+    left: .2em;
+    top: .2em;
+    width: 3em;
+    height: 1.6em;    
+    border-radius: 1.6em;
+    background-color: #888888;  
   }
   input:checked + & {
-    font-style: normal;
-    font-weight: bold;
     color: white;
-    padding-left: 0.5em;
     background-color: $primary;
   }
-  input:checked + &:before {
-    transform: translateX(5.5em);
+  input:checked + &:after {
+    transform: translateX(1.4em);    
   }
 }
 
@@ -143,7 +146,12 @@
   grid-template-rows: 5em;
   grid-gap: .5em;
   padding: .5em 0;
-  height: 6em;
+  max-height: 6em;
+  overflow: hidden;
+  animation: unfiltering 1s forwards;
+  &.-is-filtered {
+    animation: filtering 1s forwards;
+  }
   &__logo {
     position:relative;
     grid-column: 1/2;
@@ -176,6 +184,18 @@
   }
   &__text {
     display: none;
+  }
+  @keyframes filtering {
+    to {
+      padding: 0;
+      max-height: 0;
+    }
+  }
+  @keyframes unfiltering {
+    from {
+      padding: 0;
+      max-height: 0;
+    }
   }
 }
 
