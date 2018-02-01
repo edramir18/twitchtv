@@ -197,6 +197,7 @@ input:checked + .slider:after {
   display: grid;
   grid-template-columns: 5em 14.7em;
   grid-template-rows: 2em 3em 11.25em;
+  align-items: center;
   grid-gap: .2em;
   padding: .5em;
   margin: 0.5em;
@@ -252,6 +253,17 @@ input:checked + .slider:after {
   overflow: hidden;
   grid-column: 1 / span 2;
   grid-row: 3;
+  max-height: 100%;
+}
+
+.streamer__preview > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.streamer__preview.-is-hidden {
+  display: none;
 }
 
 @keyframes filtering {

@@ -30,22 +30,38 @@ function fetchUserTwitchInfo (user) {
   const streamPromise = fecthJSON(urlStream)
 
   return Promise.all([userPromise, channelPromise, streamPromise]).then((jsonValues) => {
-    return new Promise(function (resolve, reject) {
-      if (jsonValues.length < 3) {
-        reject(Error('Incompleted Information'))
-      } else {
-        resolve({user: jsonValues[0], channel: jsonValues[1], stream: jsonValues[2]})
-      }
-    })
+    return showUserInformation({user: jsonValues[0], channel: jsonValues[1], stream: jsonValues[2]})
   })
 }
 
-function showUserInformation (users) {
+function showUserInformation (streamer) {
+  const main = document.getElementById('main_panel').querySelector('.content')
+  if (streamer.user.hasOwnProperty('error')) return
+  const twitch = document.getElementById('twitchuser').content.cloneNode(true)
+  if (streamer.stream.stream) {
+    twitch.querySelector('article').setAttribute('data-live', true)
+    twitch.querySelector('.streamer__logo').classList.add('-is-live')
+    twitch.querySelector('.streamer__preview>img').setAttribute('src', streamer.stream.stream.preview.medium)
+    twitch.querySelector('p').textContent = streamer.stream.stream.channel.status
+  } else {
+    twitch.querySelector('article').setAttribute('data-live', false)
+    twitch.querySelector('p').textContent = 'Offline'
+    if (streamer.channel.profile_banner) {
+      twitch.querySelector('.streamer__preview>img').setAttribute('src', streamer.channel.profile_banner)
+    }
+  }
+  twitch.querySelector('img').setAttribute('src', streamer.user.logo)
+  twitch.querySelector('a').textContent = streamer.user.name
+  twitch.querySelector('a').setAttribute('href', streamer.channel.url)
+  main.appendChild(twitch)
+  return twitch
+}
+
+function showUsersInformation (users) {
   const content = document.createElement('div')
   content.classList.add('content')
 
   users.forEach(k => {
-    console.log(k)
     if (k.user.hasOwnProperty('error')) return
     const twitch = document.getElementById('twitchuser').content.cloneNode(true)
     if (k.stream.stream) {
@@ -56,24 +72,27 @@ function showUserInformation (users) {
     } else {
       twitch.querySelector('article').setAttribute('data-live', false)
       twitch.querySelector('p').textContent = 'Offline'
-      if (k.channel.profile_banner) {        
+      if (k.channel.profile_banner) {
         twitch.querySelector('.streamer__preview>img').setAttribute('src', k.channel.profile_banner)
+      } else {
+        twitch.querySelector('.streamer__preview>img').classList.toggle('-is-hidden')
       }
     }
     twitch.querySelector('img').setAttribute('src', k.user.logo)
     twitch.querySelector('a').textContent = k.user.name
-    twitch.querySelector('a').setAttribute('href', k.channel.url)    
+    twitch.querySelector('a').setAttribute('href', k.channel.url)
     content.appendChild(twitch)
   })
   updateMain('.splash', content)
+  // showUserInformation(users[0])
 }
 
-function updateMain (selector, panel) {
+function updateMain (selector) {
   const target = document.querySelector(selector)
   target.classList.add('-is-dismissed')
-  target.addEventListener('animationend', function () {
+  target.addEventListener('animationend', function (e) {
     const main = document.querySelector('#main_panel')
-    main.replaceChild(panel, main.firstElementChild)
+    main.removeChild(e.target)
     document.querySelector('.nav').classList.remove('-is-hidden')
   })
 }
@@ -84,8 +103,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
   filterRatios.forEach(k => k.addEventListener('change', radioHandler))
   const users = ['freecodecamp', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'ESL_SC2', 'OgamingSC2',
     'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'test_channel']
-  Promise.all(users.map(u => fetchUserTwitchInfo(u))).then(values => {
-    showUserInformation(values)
+  Promise.race(users.map(u => fetchUserTwitchInfo(u))).then(() => {    
+    updateMain('.splash')
   })
   .catch(err => {
     console.log('ERROR: ' + err)
