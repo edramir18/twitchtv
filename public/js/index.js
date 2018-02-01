@@ -1,24 +1,15 @@
 'use strict'
 /* global fetch:false */
 
-function ratioHandler (event) {
-  ratioHandlerIndividual()
-}
-
-function ratioHandlerIndividual () {
-  const selector = document.querySelector('input[name=filter]:checked').value
-  console.log(selector)
+function radioHandler (event) {
+  const filter = event.target.value
+  const isLiveFilteredOut = filter !== 'all' && filter !== 'live'
+  const isOfflineFilteredOut = filter !== 'all' && filter !== 'offline'
+  // radioHandlerIndividual()
   const lives = document.querySelectorAll('article[data-live=true]')
   const offline = document.querySelectorAll('article[data-live=false]')
-
-  if (lives.length === 0 && offline.length) return
-
-  const isLiveSelected = selector === 'all' || selector === 'live'
-  const isOfflineSelected = selector === 'all' || selector === 'offline'
-
-  if (isLiveSelected){
-    console.log(document.querySelectorAll('article[data-live=true].-is-filtered'))
-  }
+  lives.forEach(k => k.classList.toggle('-is-filtered', isLiveFilteredOut))
+  offline.forEach(k => k.classList.toggle('-is-filtered', isOfflineFilteredOut))
 }
 
 function fecthJSON (url) {
@@ -68,7 +59,6 @@ function showUserInformation (users) {
     twitch.querySelector('a').textContent = k.user.name
     twitch.querySelector('a').setAttribute('href', k.channel.url)
     twitch.querySelector('p').textContent = k.user.bio
-    twitch.addEventListener('animationend', ratioHandlerIndividual)
     content.appendChild(twitch)
   })
   updateMain('.splash', content)
@@ -87,7 +77,7 @@ function updateMain (selector, panel) {
 document.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOM Loaded')
   const filterRatios = document.querySelectorAll('[name=filter]')
-  filterRatios.forEach(k => k.addEventListener('change', ratioHandler))
+  filterRatios.forEach(k => k.addEventListener('change', radioHandler))
   const users = ['esl_sc2', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'freecodecamp', 'test_channel']
   Promise.all(users.map(u => fetchUserTwitchInfo(u))).then(values => {
     showUserInformation(values)
