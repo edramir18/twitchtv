@@ -38,9 +38,10 @@ function showUserInformation (streamer) {
   const main = document.getElementById('main_panel').querySelector('.content')
   if (streamer.user.hasOwnProperty('error')) return
   const twitch = document.getElementById('twitchuser').content.cloneNode(true)
-  if (streamer.stream.stream) {
+  if (streamer.stream.stream) {    
     twitch.querySelector('article').setAttribute('data-live', true)
     twitch.querySelector('.streamer__logo').classList.add('-is-live')
+    
     twitch.querySelector('.streamer__preview>img').setAttribute('src', streamer.stream.stream.preview.medium)
     twitch.querySelector('p').textContent = streamer.stream.stream.channel.status
   } else {
@@ -53,38 +54,9 @@ function showUserInformation (streamer) {
   twitch.querySelector('img').setAttribute('src', streamer.user.logo)
   twitch.querySelector('a').textContent = streamer.user.name
   twitch.querySelector('a').setAttribute('href', streamer.channel.url)
+  twitch.querySelector('.streamer__preview').setAttribute('href', streamer.channel.url)
   main.appendChild(twitch)
   return twitch
-}
-
-function showUsersInformation (users) {
-  const content = document.createElement('div')
-  content.classList.add('content')
-
-  users.forEach(k => {
-    if (k.user.hasOwnProperty('error')) return
-    const twitch = document.getElementById('twitchuser').content.cloneNode(true)
-    if (k.stream.stream) {
-      twitch.querySelector('article').setAttribute('data-live', true)
-      twitch.querySelector('.streamer__logo').classList.add('-is-live')
-      twitch.querySelector('.streamer__preview>img').setAttribute('src', k.stream.stream.preview.medium)
-      twitch.querySelector('p').textContent = k.stream.stream.channel.status
-    } else {
-      twitch.querySelector('article').setAttribute('data-live', false)
-      twitch.querySelector('p').textContent = 'Offline'
-      if (k.channel.profile_banner) {
-        twitch.querySelector('.streamer__preview>img').setAttribute('src', k.channel.profile_banner)
-      } else {
-        twitch.querySelector('.streamer__preview>img').classList.toggle('-is-hidden')
-      }
-    }
-    twitch.querySelector('img').setAttribute('src', k.user.logo)
-    twitch.querySelector('a').textContent = k.user.name
-    twitch.querySelector('a').setAttribute('href', k.channel.url)
-    content.appendChild(twitch)
-  })
-  updateMain('.splash', content)
-  // showUserInformation(users[0])
 }
 
 function updateMain (selector) {
@@ -103,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
   filterRatios.forEach(k => k.addEventListener('change', radioHandler))
   const users = ['freecodecamp', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'ESL_SC2', 'OgamingSC2',
     'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'test_channel']
-  Promise.race(users.map(u => fetchUserTwitchInfo(u))).then(() => {    
+  Promise.race(users.map(u => fetchUserTwitchInfo(u))).then(() => {
     updateMain('.splash')
   })
   .catch(err => {
