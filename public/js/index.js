@@ -5,7 +5,6 @@ function radioHandler (event) {
   const filter = event.target.value
   const isLiveFilteredOut = filter !== 'all' && filter !== 'live'
   const isOfflineFilteredOut = filter !== 'all' && filter !== 'offline'
-  // radioHandlerIndividual()
   const lives = document.querySelectorAll('article[data-live=true]')
   const offline = document.querySelectorAll('article[data-live=false]')
   lives.forEach(k => k.classList.toggle('-is-filtered', isLiveFilteredOut))
@@ -52,13 +51,18 @@ function showUserInformation (users) {
     if (k.stream.stream) {
       twitch.querySelector('article').setAttribute('data-live', true)
       twitch.querySelector('.streamer__logo').classList.add('-is-live')
+      twitch.querySelector('.streamer__preview>img').setAttribute('src', k.stream.stream.preview.medium)
+      twitch.querySelector('p').textContent = k.stream.stream.channel.status
     } else {
       twitch.querySelector('article').setAttribute('data-live', false)
+      twitch.querySelector('p').textContent = 'Offline'
+      if (k.channel.profile_banner) {        
+        twitch.querySelector('.streamer__preview>img').setAttribute('src', k.channel.profile_banner)
+      }
     }
     twitch.querySelector('img').setAttribute('src', k.user.logo)
     twitch.querySelector('a').textContent = k.user.name
-    twitch.querySelector('a').setAttribute('href', k.channel.url)
-    twitch.querySelector('p').textContent = k.user.bio
+    twitch.querySelector('a').setAttribute('href', k.channel.url)    
     content.appendChild(twitch)
   })
   updateMain('.splash', content)

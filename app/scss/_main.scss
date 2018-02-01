@@ -18,10 +18,14 @@ h1, h2, h3, h4 , h5, h6 {
 }
 
 a, a:visited {
-  color: initial;
+  color: inherit;
   text-decoration: none;
 }
 
 input[type="radio"] {
   display: none;
+}
+
+img {
+  width: 100%;
 }
