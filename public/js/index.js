@@ -78,7 +78,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOM Loaded')
   const filterRatios = document.querySelectorAll('[name=filter]')
   filterRatios.forEach(k => k.addEventListener('change', radioHandler))
-  const users = ['esl_sc2', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'freecodecamp', 'test_channel']
+  const users = ['freecodecamp', 'LowkoTV', 'iamextrememadness', 'FeelinkHS', 'ESL_SC2', 'OgamingSC2',
+    'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'test_channel']
   Promise.all(users.map(u => fetchUserTwitchInfo(u))).then(values => {
     showUserInformation(values)
   })

@@ -15,11 +15,11 @@ gulp.task('sass', () => {
 })
 
 gulp.task('serve', ['sass'], function () {
+  const src = './app'
   browserSync.init({
     server: './public'
   })
-
-  gulp.watch('./app/scss/*.scss', ['sass'])
+  gulp.watch('scss/*.scss', {cwd: src}, ['sass'])
   gulp.watch('./public/*.html').on('change', browserSync.reload)
   gulp.watch('./public/js/*.js').on('change', browserSync.reload)
 })
